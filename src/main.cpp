@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
 	if(config.gen)
 	{
-		gen_mips_table();
+		gen_mips_table(argc,argv);
 		return 0;
 	}
 

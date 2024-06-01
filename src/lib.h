@@ -6,7 +6,7 @@
 #include <set>
 #include <unordered_map>
 #include <string_view>
-#include <format>
+#include <fmt/format.h>
 #include <iterator>
 #include <iostream>
 
@@ -19,7 +19,7 @@ namespace beyond_all_repair
 template<typename... Args>
 inline void print(const char* fmt, Args... args)
 {
-    printf("%s",std::vformat(fmt, std::make_format_args(args...)).c_str());
+    fmt::vprint(fmt,fmt::make_format_args(args...));
 }
 
 

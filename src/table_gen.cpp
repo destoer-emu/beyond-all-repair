@@ -21,23 +21,39 @@ void gen_blank()
 	}	
 }
 
-void gen_mips_table()
+void gen_mips_table(int argc, char* argv[])
 {
-	printf("#include <n64/cpu.h>\n");
-	printf("namespace nintendo64\n");
-	printf("{\n");
+	if(argc != 4)
+	{
+		printf("usage: <bar> -g <mips-version> <output>\n");
+		return;
+	}
 
-	printf("const INSTR_FUNC INSTR_TABLE_DEBUG[] = \n");
-	printf("{\n");
+
+	FILE* fp = fopen(argv[3],"w");
+
+	if(!fp)
+	{
+		printf("could not create table output file: %s\n",argv[3]);
+		return;
+	}
+
+	// account for enum zero indexing
+	const u32 version = atoi(argv[2]) - 1;
+
+	printf("generating instruction table version: %d -> %s\n",version + 1,argv[3]);
+
+	fprintf(fp,"const INSTR_FUNC INSTR_TABLE_DEBUG[] = \n");
+	fprintf(fp,"{\n");
 
 	// gen a dummy table
 	for(u32 i = 0; i < INSTR_TABLE_SIZE; i++)
 	{
-		if(INSTR_TABLE[i].version <= MIPS3)
+		if(INSTR_TABLE[i].version <= version)
 		{
 			if(is_mem_access(INSTR_TABLE[i].fmt) || INSTR_TABLE[i].fmt == instr_type::mips_class)
 			{
-				printf("\t&instr_%s<true>,\n",INSTR_TABLE[i].name);
+				fprintf(fp,"\t&instr_%s<true>,\n",INSTR_TABLE[i].name);
 			}
 
 			else
@@ -55,36 +71,36 @@ void gen_mips_table()
 						}
 					}
 
-					printf("\t&instr_%s,\n",name.c_str());
+					fprintf(fp,"\t&instr_%s,\n",name.c_str());
 				}
 
 				else
 				{
-					printf("\t&instr_%s,\n",INSTR_TABLE[i].name);
+					fprintf(fp,"\t&instr_%s,\n",INSTR_TABLE[i].name);
 				}
 			}
 		}
 
 		else
 		{
-			printf("\t&instr_unknown_opcode,\n");
+			fprintf(fp,"\t&instr_unknown_opcode,\n");
 		}
 	}
 
-	printf("};\n");
+	fprintf(fp,"};\n");
 
 
-	printf("const INSTR_FUNC INSTR_TABLE_NO_DEBUG[] = \n");
-	printf("{\n");
+	fprintf(fp,"const INSTR_FUNC INSTR_TABLE_NO_DEBUG[] = \n");
+	fprintf(fp,"{\n");
 
 	// gen a dummy table
 	for(u32 i = 0; i < INSTR_TABLE_SIZE; i++)
 	{
-		if(INSTR_TABLE[i].version <= MIPS3)
+		if(INSTR_TABLE[i].version <= version)
 		{
 			if(is_mem_access(INSTR_TABLE[i].fmt) || INSTR_TABLE[i].fmt == instr_type::mips_class)
 			{
-				printf("\t&instr_%s<false>,\n",INSTR_TABLE[i].name);
+				fprintf(fp,"\t&instr_%s<false>,\n",INSTR_TABLE[i].name);
 			}
 
 			else
@@ -102,24 +118,22 @@ void gen_mips_table()
 						}
 					}
 
-					printf("\t&instr_%s,\n",name.c_str());
+					fprintf(fp,"\t&instr_%s,\n",name.c_str());
 				}
 
 				else
 				{
-					printf("\t&instr_%s,\n",INSTR_TABLE[i].name);
+					fprintf(fp,"\t&instr_%s,\n",INSTR_TABLE[i].name);
 				}
 			}
 		}
 
 		else
 		{
-			printf("\t&instr_unknown_opcode,\n");
+			fprintf(fp,"\t&instr_unknown_opcode,\n");
 		}
 	}
 
-	printf("};\n");
-
-	printf("}\n");
+	fprintf(fp,"};\n");
 }
 }

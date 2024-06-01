@@ -334,6 +334,7 @@ u32 calc_cop0_table_offset(const Opcode& opcode)
     if(type == BC)
     {
         assert(false);
+        return 0;
     }
 
     else

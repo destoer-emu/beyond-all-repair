@@ -15,6 +15,10 @@ file(GLOB bar_src_files
 
 add_executable(bar ${bar_src_files})
 
+
+find_package(fmt REQUIRED)
+target_link_libraries(bar fmt::fmt)
+
 if(WIN32)
 
 else()

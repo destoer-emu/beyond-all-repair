@@ -7,6 +7,7 @@ b32 unknown_mark(Program& program,Func& func,  Block& block, u64 pc, const Opcod
 
     UNUSED(program); UNUSED(pc); UNUSED(opcode); UNUSED(func); UNUSED(block);
     assert(false);
+    return false;
 }
 
 

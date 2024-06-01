@@ -231,12 +231,12 @@ void disassemble_console(Program& program,Config& config)
 
 std::string default_loc_name(u64 addr)
 {
-    return std::format("LOC_{:08X}",addr);
+    return fmt::format("LOC_{:08X}",addr);
 }
 
 std::string default_func_name(u64 addr)
 {
-    return std::format("FUN_{:08X}",addr);
+    return fmt::format("FUN_{:08X}",addr);
 }
 
 // TODO: this wont produce marked label names yet!
