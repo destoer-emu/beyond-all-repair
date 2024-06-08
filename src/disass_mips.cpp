@@ -480,7 +480,13 @@ std::string disass_mfc0(Program& program, u64 addr, const Opcode& opcode)
     UNUSED(program); UNUSED(addr);
 
     return fmt::format("mfc0 {}, {}",REG_NAMES[opcode.rt],COP0_NAMES[opcode.rd]);
+}
 
+std::string disass_dmfc0(Program& program, u64 addr, const Opcode& opcode)
+{
+    UNUSED(program); UNUSED(addr);
+
+    return fmt::format("dmfc0 {}, {}",REG_NAMES[opcode.rt],COP0_NAMES[opcode.rd]);
 }
 
 std::string disass_mtc0(Program& program, u64 addr, const Opcode& opcode)

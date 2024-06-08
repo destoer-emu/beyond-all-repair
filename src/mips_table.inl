@@ -188,7 +188,7 @@ static constexpr Instr INSTR_TABLE[] =
     // COP0 RS
     // TODO: we havent done any versioning numbers for coprocessors
     {"mfc0",instr_type::reg_rt_rd,nullptr,&disass_mfc0,MIPS1}, //0b000'00
-    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop0,MIPS1}, //0b000'01
+    {"dmfc0",instr_type::reg_rt_rd,nullptr,&disass_dmfc0,MIPS1}, //0b000'01
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop0,MIPS1}, //0b000'10
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop0,MIPS1}, //0b000'11
     {"mtc0",instr_type::reg_rt_rd,nullptr,&disass_mtc0,MIPS1}, //0b001'00
@@ -299,11 +299,11 @@ static constexpr Instr INSTR_TABLE[] =
 
     // COP1 RS
     {"mfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'00
-    {"dmfc1",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b000'01
+    {"dmfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'01
     {"cfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'10
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b000'11
     {"mtc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'00
-    {"dmtc1",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b001'01
+    {"dmtc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'01
     {"ctc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'10
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b001'11
 
@@ -444,7 +444,7 @@ static constexpr Instr INSTR_TABLE[] =
     {"c.le.s",instr_type::float_fs_ft,nullptr,nullptr,MIPS1}, //0b110'110
     {"c.ngt.s",instr_type::float_fs_ft,nullptr,nullptr,MIPS1}, //0b110'111
 
-        // COP1 FMT D
+    // COP1 FMT D
     {"add.d",instr_type::float_fd_fs_ft,nullptr,nullptr,MIPS1}, //0b000'000
     {"sub.d",instr_type::float_fd_fs_ft,nullptr,nullptr,MIPS1}, //0b000'001
     {"mul.d",instr_type::float_fd_fs_ft,nullptr,nullptr,MIPS1}, //0b000'010
