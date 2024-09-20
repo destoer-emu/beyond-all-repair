@@ -1,11 +1,12 @@
-#include <lib.cpp>
-#include <config.cpp>
-#include <mips.cpp>
-#include <elf.cpp>
-#include <table_gen.cpp>
-#include <metric.cpp>
+#include <destoer.cpp>
+using namespace destoer;
 
-
+#include "lib.cpp"
+#include "config.cpp"
+#include "mips.cpp"
+#include "elf.cpp"
+#include "table_gen.cpp"
+#include "metric.cpp"
 
 namespace beyond_all_repair
 {

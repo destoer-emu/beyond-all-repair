@@ -1,6 +1,8 @@
 #pragma once
 #include <lib.h>
 #include <destoer.h>
+#include <mips.h>
+#include <decode.h>
 
 namespace beyond_all_repair
 {
@@ -127,4 +129,15 @@ u32 get_fs(const Opcode& opcode);
 u32 get_ft(const Opcode& opcode);
 u32 get_fd(const Opcode& opcode);
 
+u32 calc_base_table_offset(const Opcode& opcode);
+u32 calc_cop0_table_offset(const Opcode& opcode);
+u32 calc_cop1_table_offset(const Opcode& opcode);
+
+Opcode make_opcode(const u32 op);
+
+u32 instr_idx(const Opcode& opcode, u32 version);
+
+u64 abs(u64 v);
+
+std::string disass_mips(Program& program, u64 addr, const Opcode &opcode);
 }

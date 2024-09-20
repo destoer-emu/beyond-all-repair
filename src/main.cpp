@@ -1,11 +1,6 @@
 
-#include <lib.h>
-#include <destoer.cpp>
-
-using namespace destoer;
+#include "beyond_all_repair.cpp"
 using namespace beyond_all_repair;
-#include <beyond_all_repair.cpp>
-
 
 int main(int argc, char* argv[])
 {
