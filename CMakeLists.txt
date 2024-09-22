@@ -19,13 +19,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Werror -fno-exceptions -fno-rtti -fo
 endif()
 
 
-# build bar
-add_library(bar "src/beyond_all_repair.cpp")
-target_link_libraries(bar fmt::fmt)
-target_include_directories(bar PUBLIC "src/headers")
 
 # destoer lib
-target_include_directories(bar PUBLIC "destoer-lib/src/")
+if (NOT TARGET destoer)
+    add_subdirectory("destoer-lib")
+endif()
+
+# build bar
+add_library(bar "src/beyond_all_repair.cpp")
+target_link_libraries(bar fmt::fmt destoer)
+target_include_directories(bar PUBLIC "src/headers")
 
 # build command line tool
 add_executable(beyond_all_repair "src/main.cpp")

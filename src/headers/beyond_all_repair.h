@@ -1,6 +1,6 @@
 #pragma once
 #include <lib.h>
-#include <destoer.h>
+#include <destoer/destoer.h>
 #include <mips.h>
 #include <decode.h>
 

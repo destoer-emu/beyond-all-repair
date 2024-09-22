@@ -1,5 +1,6 @@
-#include <destoer.cpp>
+#include <destoer/destoer.h>
 using namespace destoer;
+
 
 #include "lib.cpp"
 #include "config.cpp"
