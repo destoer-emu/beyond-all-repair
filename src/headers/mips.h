@@ -76,8 +76,10 @@ static constexpr u32 MIPS_INSTR_SIZE = sizeof(u32);
 
 // exceptions
 static constexpr u32 INTERRUPT = 0;
+static constexpr u32 TLBW = 1;
 static constexpr u32 TLBL = 2;
 static constexpr u32 TLBS = 3;
+static constexpr u32 BREAK = 9;
 static constexpr u32 COP_UNUSABLE = 11;
 
 extern const char *COP0_NAMES[32];

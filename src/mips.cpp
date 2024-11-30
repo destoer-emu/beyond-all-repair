@@ -42,6 +42,8 @@ enum class instr_type
     float_fs_ft,
     branch_cop_cond,
 
+    implicit,
+
     // note: not a real fmt
     mips_class,
 

@@ -164,6 +164,11 @@ std::string disass_mips_default(Program& program, u64 addr, const Opcode &opcode
             return fmt::format("{} 0x{:08x}",instr->name,code);
         }
 
+        case instr_type::implicit:
+        {
+            return fmt::format("{}",instr->name);
+        }
+
         case instr_type::float_rt_fs:
         {
             const u32 fs = get_fs(opcode);
