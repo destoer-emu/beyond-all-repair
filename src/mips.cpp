@@ -245,9 +245,60 @@ void mark_block_mips(Program& program,Func& func,Block& block)
     block.hash = hash_block(program,block);
 }
 
+void print_console_func_mips(Program& program, const Func &func, const Config& config, u64 pc)
+{
+    for(u64 block_start : func.block_list)
+    {
+        const auto& block = program.block_lookup[block_start];
+
+        print("{}:\n",block.name);
+
+        // print the block
+        for(u64 addr = block.addr; addr != block.addr + block.size; )
+        {
+            u32 op;
+
+            // check read is in range
+            if(!read_program(program,addr, &op))
+            {
+                print("Warning addr 0x{:x} out of range for block\n",addr);
+                return;
+            }
+
+
+            const b32 cur_pc = pc == addr;
+
+            addr += MIPS_INSTR_SIZE;
+
+            const auto opcode = make_opcode(op);    
+
+            print("   ");
+
+            if(config.print_addr)
+            {
+                print("0x{:08x}: ",(addr - MIPS_INSTR_SIZE));
+            }
+
+            if(config.print_opcodes)
+            {
+                print("0x{:08x} ",op);
+            }
+
+            // print the actual instruction
+            print("{}",disass_mips(program,addr,opcode));
+
+            if(cur_pc)
+            {               
+                print(" <-----");
+            }
+
+            print("\n");
+        }
+    }
+}
+
 void print_console_mips(Program& program, Config& config)
 {
-
     for(const auto &[key, func] : program.func_lookup)
     {
         if(!config.print_external && func.external)
@@ -255,45 +306,7 @@ void print_console_mips(Program& program, Config& config)
             continue;
         }
 
-        for(u64 block_start : func.block_list)
-        {
-            const auto& block = program.block_lookup[block_start];
-
-            print("{}:\n",block.name);
-
-            // print the block
-            for(u64 addr = block.addr; addr != block.addr + block.size; )
-            {
-                u32 op;
-
-                // check read is in range
-                if(!read_program(program,addr, &op))
-                {
-                    print("Warning addr 0x{:x} out of range for block\n",addr);
-                    return;
-                }
-
-                addr += MIPS_INSTR_SIZE;
-
-                const auto opcode = make_opcode(op);    
-
-                print("   ");
-
-                if(config.print_addr)
-                {
-                    print("0x{:08x}: ",(addr - MIPS_INSTR_SIZE));
-                }
-
-                if(config.print_opcodes)
-                {
-                    print("0x{:08x} \n",op);
-                }
-
-                // print the actual instruction
-                print("{}\n",disass_mips(program,addr,opcode));
-            }
-        }
-
+        print_console_func_mips(program,func,config,PC_UNK);
         puts("\n");
     }
 }

@@ -1,5 +1,6 @@
 namespace beyond_all_repair
 {
+
 // NOTE: this is unimpl stub 
 b32 unknown_mark(Program& program,Func& func,  Block& block, u64 pc, const Opcode& opcode)
 {
@@ -77,16 +78,14 @@ b32 mark_jump(Program& program,Func& func,  Block& block, u64 pc, const Opcode& 
 
 b32 mark_jal(Program& program,Func& func,  Block& block, u64 pc, const Opcode& opcode)
 {
-    UNUSED(func);
+    UNUSED(func); UNUSED(block);
 
     const u64 target = jump_addr(pc,opcode.op);
 
     // add target as func
     add_func(program,target,pc,SIZE_UNK,default_func_name(target));
 
-    block.size += MIPS_INSTR_SIZE;
-
-    return true;
+    return false;
 }
 
 b32 mark_beq(Program& program,Func& func,  Block& block, u64 pc, const Opcode& opcode)

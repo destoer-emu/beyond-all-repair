@@ -1,16 +1,7 @@
+#include <beyond_all_repair.h>
+
 namespace beyond_all_repair
 {
-	struct Config
-	{
-		b32 disassemble = false;
-		b32 print_external = false;
-		b32 print_addr = false;
-		b32 print_opcodes = false;
-		b32 gen = false;
-		b32 linear = false;
-		b32 gen_blank = false;
-	};
-
 	Config parse_config(const char* flags)
 	{
 		Config config;

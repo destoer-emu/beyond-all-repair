@@ -62,6 +62,16 @@ struct Opcode
     u16 imm = 0;
 };
 
+struct Config
+{
+    b32 disassemble = false;
+    b32 print_external = false;
+    b32 print_addr = false;
+    b32 print_opcodes = false;
+    b32 gen = false;
+    b32 linear = false;
+    b32 gen_blank = false;
+};
 
 // TODO: need a way to get a function by block from an arbitary address
 // but we aernt going to worry about this just yet
@@ -112,8 +122,13 @@ b32 read_program(Program& program, u64 addr, access_type* out)
 
 
 Program make_program(u64 entry_point,b32 is_be, READ_FUNC func,void* data);
-void add_func(Program& program,u64 target, u64 pc,u32 size,const std::string& name, b32 external = false);
+Func& add_func(Program& program,u64 target, u64 pc,u32 size,const std::string& name, b32 external = false);
+void disassemble_func(Program& program, Func& func);
 void disassemble_console(Program& program);
+Func& add_func_no_context(Program& program, u64 target);
+void clear_references(Program& program);
+void print_console_func_mips(Program& program, const Func &func, const Config& config, u64 pc);
+
 std::string default_loc_name(u64 addr);
 std::string default_func_name(u64 addr);
 std::string loc_name(Program& program, u64 addr);

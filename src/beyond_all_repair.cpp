@@ -7,7 +7,6 @@ using namespace destoer;
 #include "mips.cpp"
 #include "elf.cpp"
 #include "table_gen.cpp"
-#include "metric.cpp"
 
 namespace beyond_all_repair
 {
@@ -35,7 +34,15 @@ void local_call(Program& program,Func& func,u64 target, u64 pc)
     add_block(program,func,target,pc,default_loc_name(target));
 }
 
-void add_func(Program& program,u64 target,u64 pc,u32 size,const std::string& name,b32 external)
+void clear_references(Program& program)
+{
+    program.func_target.clear();
+    program.func_lookup.clear();
+    program.func_name_lookup.clear();
+    program.block_lookup.clear();
+}
+
+Func& add_func(Program& program,u64 target,u64 pc,u32 size,const std::string& name,b32 external)
 {
     // if we allready have this is a function dont bother adding it
     if(!program.func_lookup.count(target))
@@ -62,8 +69,14 @@ void add_func(Program& program,u64 target,u64 pc,u32 size,const std::string& nam
 
         func.references.push_back(pc - MIPS_INSTR_SIZE);
     }
+
+    return program.func_lookup[target];
 }
 
+Func& add_func_no_context(Program& program, u64 target)
+{
+    return add_func(program,target,PC_UNK,SIZE_UNK,default_func_name(target),false);
+}
 
 std::optional<u64> lower_block(Program& program, u64 addr)
 {
