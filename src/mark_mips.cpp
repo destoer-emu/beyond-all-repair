@@ -18,11 +18,19 @@ b32 unknown_mark_err(Program& program,Func& func,  Block& block, u64 pc, const O
     return true;
 }
 
+void mark_delay_slot(Program& program, Block& block, u64 pc)
+{
+    // if the delay slot is allready a target we need to ignore it
+    if(!block_exists(program,pc))
+    {
+        block.size += MIPS_INSTR_SIZE;
+    }
+}
+
 void cond_branch_exit(Program& program,Func& func, Block& block,u64 target, u64 pc)
 {
-    // account for delay slot
-    block.size += MIPS_INSTR_SIZE;
-    
+    // account for delay slot 
+    mark_delay_slot(program,block,pc);
 
     // create block exists for target + fallthrough 
     add_block(program,func,target,pc,default_loc_name(target));
@@ -40,7 +48,7 @@ void branch_exit(Program& program, Func& func, Block& block, u64 target,u64 pc)
     add_block(program,func,target,pc,default_loc_name(target));
     block.exit.push_back(target);
 
-    block.size += MIPS_INSTR_SIZE;   
+    mark_delay_slot(program,block,pc);
 }
 
 b32 mark_jr(Program& program,Func& func,  Block& block, u64 pc, const Opcode& opcode)
@@ -48,8 +56,7 @@ b32 mark_jr(Program& program,Func& func,  Block& block, u64 pc, const Opcode& op
     UNUSED(program); UNUSED(pc); UNUSED(opcode); UNUSED(func); UNUSED(block);
     // TODO: revisit this when partial evalutiaon is impl
 
-    block.size += MIPS_INSTR_SIZE;
-
+    mark_delay_slot(program,block,pc);
     return true;
 }
 
@@ -71,8 +78,7 @@ b32 mark_jump(Program& program,Func& func,  Block& block, u64 pc, const Opcode& 
     add_block(program,func,target,pc,default_loc_name(target));
     block.exit.push_back(target);
 
-    block.size += MIPS_INSTR_SIZE;
-
+    mark_delay_slot(program,block,pc);
     return true;
 }
 

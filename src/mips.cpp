@@ -224,6 +224,13 @@ void mark_block_mips(Program& program,Func& func,Block& block)
         {
             addr += MIPS_INSTR_SIZE;
             block.size += MIPS_INSTR_SIZE;
+
+            // we have hit the start of another basic block due to a branch over another
+            if(block_exists(program,addr))
+            {
+                done = true;
+                break;
+            }
         }
 
         const auto opcode = make_opcode(op);
@@ -232,13 +239,6 @@ void mark_block_mips(Program& program,Func& func,Block& block)
         if(instr->mark_func)
         {
             done = instr->mark_func(program,func,block,addr,opcode);
-        }
-
-        // we have hit the start of another basic block due to a branch over another
-        if(block_exists(program,addr))
-        {
-            done = true;
-            break;
         }
     }
 
