@@ -99,10 +99,10 @@ static constexpr u32 COP0_FUNCT_MASK = 0b111'111;
 
 enum MIPS_VER
 {
-    MIPS1,
-    MIPS2,
-    MIPS3,
-    MIPS4,
+    MIPS1 = 1,
+    MIPS2 = 2,
+    MIPS3 = 3,
+    MIPS4 = 4,
 };
 
 }

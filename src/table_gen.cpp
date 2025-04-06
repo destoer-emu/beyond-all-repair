@@ -38,10 +38,9 @@ void gen_mips_table(int argc, char* argv[])
 		return;
 	}
 
-	// account for enum zero indexing
-	const u32 version = atoi(argv[2]) - 1;
+	const u32 version = atoi(argv[2]);
 
-	printf("generating instruction table version: %d -> %s\n",version + 1,argv[3]);
+	printf("generating instruction table version: %d -> %s\n",version,argv[3]);
 
 	fprintf(fp,"const INSTR_FUNC INSTR_TABLE_DEBUG[] = \n");
 	fprintf(fp,"{\n");
