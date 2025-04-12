@@ -354,6 +354,13 @@ u32 calc_cop1_table_offset(const Opcode& opcode)
     return decode.offset + table_offset;
 }
 
+u32 calc_cop2_table_offset(const Opcode& opcode)
+{
+    const u32 table_offset = (opcode.op >> COP2_RS_SHIFT) & COP2_RS_MASK;
+
+    return COP2_RS_OFFSET + table_offset;
+}
+
 const Instr* decode_cop1(const Opcode& opcode, u32 version)
 {
     UNUSED(version);
@@ -361,5 +368,14 @@ const Instr* decode_cop1(const Opcode& opcode, u32 version)
     const u32 offset = calc_cop1_table_offset(opcode);
     return &INSTR_TABLE[offset];
 }
+
+const Instr* decode_cop2(const Opcode& opcode, u32 version)
+{
+    UNUSED(version);
+
+    const u32 offset = calc_cop2_table_offset(opcode);
+    return &INSTR_TABLE[offset];
+}
+
 
 }

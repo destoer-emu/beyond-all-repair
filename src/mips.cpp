@@ -42,6 +42,8 @@ enum class instr_type
     float_fs_ft,
     branch_cop_cond,
 
+    cop2_rt_rs,
+
     implicit,
 
     // note: not a real fmt
@@ -188,6 +190,7 @@ const Instr* decode_regimm(const Opcode& opcode,u32 version);
 const Instr* decode_special(const Opcode& opcode,u32 version);
 const Instr* decode_cop0(const Opcode& opcode, u32 version);
 const Instr* decode_cop1(const Opcode& opcode, u32 version);
+const Instr* decode_cop2(const Opcode& opcode, u32 version);
 
 
 }

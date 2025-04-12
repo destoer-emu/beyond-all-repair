@@ -112,6 +112,11 @@ std::string disass_mips_default(Program& program, u64 addr, const Opcode &opcode
             return fmt::format("{} {}, {}, {}",instr->name,REG_NAMES[opcode.rd],REG_NAMES[opcode.rs],REG_NAMES[opcode.rt]);
         }
 
+        case instr_type::cop2_rt_rs:
+        {
+            return fmt::format("{} $r{}, $r{}",instr->name,opcode.rt,opcode.rs);
+        }
+
         case instr_type::reg_rd_rt_rs:
         {
             if(opcode.rd == opcode.rt)

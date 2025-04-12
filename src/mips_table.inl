@@ -23,7 +23,7 @@ static constexpr Instr INSTR_TABLE[] =
     
     {"COP0",instr_type::mips_class,nullptr,&unknown_disass_cop0,MIPS1,&decode_cop0}, //0b010'000
     {"COP1",instr_type::mips_class,nullptr,&unknown_disass_cop1,MIPS1,&decode_cop1}, //0b010'001
-    {"COP2",instr_type::mips_class,nullptr,&unknown_disass_cop2,MIPS1}, //0b010'010
+    {"COP2",instr_type::mips_class,nullptr,&unknown_disass_cop2,MIPS1,&decode_cop2}, //0b010'010
     {"COP1X",instr_type::mips_class,nullptr,&unknown_disass_cop1x,MIPS4}, //0b010'011
     {"beql",instr_type::branch_rs_rt,&mark_beql,nullptr,MIPS2}, //0b010'100
     {"bnel",instr_type::branch_rs_rt,&mark_bnel,nullptr,MIPS2}, //0b010'101
@@ -662,6 +662,43 @@ static constexpr Instr INSTR_TABLE[] =
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b111'101
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b111'110
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b111'111 
+
+    // COP1 RS
+    {"mfc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b000'00
+    {"dmfc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b000'01
+    {"cfc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b000'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b000'11
+    {"mtc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b001'00
+    {"dmtc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b001'01
+    {"ctc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b001'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b001'11
+
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b010'00
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b010'01
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b010'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b010'11
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b011'00
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b011'01
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b011'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b011'11
+
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b100'00
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b100'01
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b100'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b100'11
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b101'00
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b101'01
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b101'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b101'11
+
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b110'00
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b110'01
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b110'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b110'11
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b111'00
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b111'01
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b111'10
+    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop2,MIPS1}, //0b111'11
 
     // VERSION UNK - used as a dummy value for version failure 
     {"unknown_opcode",instr_type::unk,&unknown_mark_err,nullptr,MIPS3},

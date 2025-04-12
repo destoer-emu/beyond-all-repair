@@ -147,6 +147,7 @@ u32 get_fd(const Opcode& opcode);
 u32 calc_base_table_offset(const Opcode& opcode);
 u32 calc_cop0_table_offset(const Opcode& opcode);
 u32 calc_cop1_table_offset(const Opcode& opcode);
+u32 calc_cop2_table_offset(const Opcode& opcode);
 
 Opcode make_opcode(const u32 op);
 

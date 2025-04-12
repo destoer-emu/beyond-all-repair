@@ -61,7 +61,7 @@ static constexpr int CONFIG = 16;
 static constexpr int LLADDR = 17;
 static constexpr int WATCH_LO = 18;
 static constexpr int WATCH_HI = 19;
-static constexpr int XCONFIG = 20;
+static constexpr int XCONTEXT = 20;
 
 static constexpr int PARITY_ERROR = 26;
 static constexpr int CACHE_ERROR = 27;
@@ -79,6 +79,8 @@ static constexpr u32 INTERRUPT = 0;
 static constexpr u32 TLBM = 1;
 static constexpr u32 TLBL = 2;
 static constexpr u32 TLBS = 3;
+static constexpr u32 ADDRESS_LOAD_ERROR = 4;
+static constexpr u32 ADDRESS_STORE_ERROR = 5;
 static constexpr u32 SYSCALL = 8;
 static constexpr u32 BREAK = 9;
 static constexpr u32 COP_UNUSABLE = 11;

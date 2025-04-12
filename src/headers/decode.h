@@ -36,10 +36,12 @@ static constexpr u32 COP1_FMT_D_OFFSET = COP1_FMT_S_OFFSET + COP1_FMT_MASK + 1;
 static constexpr u32 COP1_FMT_W_OFFSET = COP1_FMT_D_OFFSET + COP1_FMT_MASK + 1;
 static constexpr u32 COP1_FMT_L_OFFSET = COP1_FMT_W_OFFSET + COP1_FMT_MASK + 1;
 
+static constexpr u32 COP2_RS_MASK = 0b111'11;
+static constexpr u32 COP2_RS_SHIFT = 21;
+static constexpr u32 COP2_RS_OFFSET = COP1_FMT_L_OFFSET + COP1_FMT_MASK + 1;
 
-
-static constexpr u32 LAST_OFFSET = COP1_FMT_L_OFFSET;
-static constexpr u32 LAST_MASK = COP1_FMT_MASK;
+static constexpr u32 LAST_OFFSET = COP2_RS_OFFSET;
+static constexpr u32 LAST_MASK = COP2_RS_MASK;
 
 // NOTE: generally every 4 or 8 instrs have the same format.
 
