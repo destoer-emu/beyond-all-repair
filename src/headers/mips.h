@@ -83,7 +83,9 @@ static constexpr u32 ADDRESS_LOAD_ERROR = 4;
 static constexpr u32 ADDRESS_STORE_ERROR = 5;
 static constexpr u32 SYSCALL = 8;
 static constexpr u32 BREAK = 9;
+static constexpr u32 RESERVED_INSTRUCTION = 10;
 static constexpr u32 COP_UNUSABLE = 11;
+static constexpr u32 ARITHMETIC_OVERFLOW = 12;
 static constexpr u32 TRAP = 13;
 static constexpr u32 FLOATING_POINT_EXCEPTION = 15;
 

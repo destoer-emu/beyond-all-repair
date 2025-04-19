@@ -301,11 +301,11 @@ static constexpr Instr INSTR_TABLE[] =
     {"mfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'00
     {"dmfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'01
     {"cfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'10
-    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b000'11
+    {"dcfc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b000'11
     {"mtc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'00
     {"dmtc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'01
     {"ctc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'10
-    {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b001'11
+    {"dctc1",instr_type::float_rt_fs,nullptr,nullptr,MIPS1}, //0b001'11
 
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b010'00
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b010'01
@@ -663,7 +663,7 @@ static constexpr Instr INSTR_TABLE[] =
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b111'110
     {"unknown_opcode",instr_type::unk,nullptr,&unknown_disass_cop1,MIPS1}, //0b111'111 
 
-    // COP1 RS
+    // COP2 RS
     {"mfc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b000'00
     {"dmfc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b000'01
     {"cfc2",instr_type::cop2_rt_rs,nullptr,nullptr,MIPS1}, //0b000'10
