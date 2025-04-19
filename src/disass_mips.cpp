@@ -503,7 +503,7 @@ std::string disass_mtc0(Program& program, u64 addr, const Opcode& opcode)
 {
     UNUSED(program); UNUSED(addr);
 
-    return fmt::format("mfc0 {}, {}",REG_NAMES[opcode.rt],COP0_NAMES[opcode.rd]);
+    return fmt::format("mtc0 {}, {}",REG_NAMES[opcode.rt],COP0_NAMES[opcode.rd]);
 
 }
 
