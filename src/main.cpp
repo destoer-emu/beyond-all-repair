@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		std::vector<u8> buf;
 		if(argc >= 3)
 		{
-			if(read_bin(argv[2],buf))
+			if(!read_bin(argv[2],buf))
 			{
 				print("could not open file: {}\n",argv[2]);
 				exit(1);
